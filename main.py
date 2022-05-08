@@ -59,15 +59,15 @@ async def join(ctx):
         try:
             await voice.channel.connect()
             embed = discord.Embed(color=0xd501c0)
-            embed.add_field(name="Koper sounds", value="Бот подключился", inline=False)
+            embed.add_field(name="Koper sounds", value="The bot is connected", inline=False)
             await ctx.send(embed=embed)
         except:
             embed = discord.Embed(color=0xd501c0)
-            embed.add_field(name="Koper sounds", value="Бот уже подключён", inline=False)
+            embed.add_field(name="Koper sounds", value="The bot is already connected", inline=False)
             await ctx.send(embed=embed)
     else:
         embed = discord.Embed(color=0xd501c0)
-        embed.add_field(name="Koper sounds", value="Вы не в войс чате", inline=False)
+        embed.add_field(name="Koper sounds", value="You are not in voice chat", inline=False)
         await ctx.send(embed=embed)
 
 @bot.command(name="disconnect")
@@ -77,11 +77,11 @@ async def disconnect(ctx):
         voice_channel = ctx.guild.voice_client
         await voice_channel.disconnect()
         embed = discord.Embed(color=0xd501c0)
-        embed.add_field(name="Koper sounds", value="Бот отключился", inline=False)
+        embed.add_field(name="Koper sounds", value="The bot has disconnected", inline=False)
         await ctx.send(embed=embed)
     except:
         embed = discord.Embed(color=0xd501c0)
-        embed.add_field(name="Koper sounds", value="Ошибка", inline=False)
+        embed.add_field(name="Koper sounds", value="Error", inline=False)
         await ctx.send(embed=embed)
 
 
@@ -101,7 +101,7 @@ async def play(ctx, url):
             pass
     else:
         embed = discord.Embed(color=0xd501c0)
-        embed.add_field(name="Koper sounds", value="Вы не в войс чате", inline=False)
+        embed.add_field(name="Koper sounds", value="You are not in voice chat", inline=False)
         await ctx.send(embed=embed)
     with youtube_dl.YoutubeDL(ytdl_format_options) as dl:
         video = dl.extract_info(url, download=False)
@@ -114,7 +114,7 @@ async def play(ctx, url):
         try:
             players[server.id] = voice_channel.play(discord.FFmpegPCMAudio(executable="bin/ffmpeg.exe", source=plrUrl), after=lambda e : check(server.id))
             embed = discord.Embed(color=0xd501c0)
-            embed.add_field(name="Koper sounds", value="Проигрывается трек: "+url, inline=False)
+            embed.add_field(name="Koper sounds", value="The track is being played: "+url, inline=False)
             await ctx.send(embed=embed)
         except:
             if server.id in queues:
@@ -127,7 +127,7 @@ async def play(ctx, url):
                 'url': url
             })
             embed = discord.Embed(color=0xd501c0)
-            embed.add_field(name="Koper sounds", value="Трек добавлен в очередь: " + url, inline=False)
+            embed.add_field(name="Koper sounds", value="Track added to queue: " + url, inline=False)
             await ctx.send(embed=embed)
 
 @bot.command(name="queue")
@@ -145,9 +145,9 @@ async def queue(ctx):
         for i in queues[server.id]:
             text += f"""{i['url']}
 """
-        embed.add_field(name="Koper sounds", value="Очередь: ```" + text + "```")
+        embed.add_field(name="Koper sounds", value="Queue: ```" + text + "```")
     else:
-        embed.add_field(name="Koper sounds", value="Очередь пуста")
+        embed.add_field(name="Koper sounds", value="Queue is empty")
 
     await ctx.send(embed=embed)
 
@@ -158,27 +158,27 @@ async def stop(ctx):
     voice_channel = ctx.guild.voice_client
     voice_channel.stop()
     embed = discord.Embed(color=0xd501c0)
-    embed.add_field(name="Koper sounds", value="Трек на остановлен", inline=False)
+    embed.add_field(name="Koper sounds", value="Track on stopped", inline=False)
     await ctx.send(embed=embed)
 
 @bot.command(name="pause")
-async def stop(ctx):
+async def pause(ctx):
     voice = ctx.author.voice
     server = ctx.message.guild
     voice_channel = ctx.guild.voice_client
     voice_channel.pause()
     embed = discord.Embed(color=0xd501c0)
-    embed.add_field(name="Koper sounds", value="Трек на поставле на паузу", inline=False)
+    embed.add_field(name="Koper sounds", value="Track on paused", inline=False)
     await ctx.send(embed=embed)
 
 @bot.command(name="resume")
-async def stop(ctx):
+async def resume(ctx):
     voice = ctx.author.voice
     server = ctx.message.guild
     voice_channel = ctx.guild.voice_client
     voice_channel.resume()
     embed = discord.Embed(color=0xd501c0)
-    embed.add_field(name="Koper sounds", value="Трек на проигрывается снова", inline=False)
+    embed.add_field(name="Koper sounds", value="Track on is being played again", inline=False)
     await ctx.send(embed=embed)
 
 
